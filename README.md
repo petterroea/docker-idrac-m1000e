@@ -1,4 +1,6 @@
-# iDRAC 6 dockerized
+# iDRAC for M1000e dockerized
+
+This is a fork of https://github.com/DomiStyle/docker-idrac6, but with the Dockerfile rewritten based on https://github.com/ncerny/docker-idrac in order to get a proper copy of openjdk 7.
 
 ![Web interface](https://i.imgur.com/Au9DPmg.png)
 *Web interface*
@@ -8,7 +10,7 @@
 
 ## About
 
-Allows access to the iDRAC 6 console without installing Java or messing with Java Web Start. Java is only run inside of the container and access is provided via web interface or directly with VNC.
+Allows access access to the virtual console of any blade in a M1000e chassis without installing Java or messing with Java Web Start. Java is only run inside of the container and access is provided via web interface or directly with VNC.
 
 Container is based on [baseimage-gui](https://github.com/jlesage/docker-baseimage-gui) by [jlesage](https://github.com/jlesage)
 
@@ -16,7 +18,7 @@ Container is based on [baseimage-gui](https://github.com/jlesage/docker-baseimag
 
 See the docker-compose [here](https://github.com/DomiStyle/docker-idrac6/blob/master/docker-compose.yml) or use this command:
 
-    docker run -d -p 5800:5800 -p 5900:5900 -e IDRAC_HOST=idrac1.example.org -e IDRAC_USER=root -e IDRAC_PASSWORD=1234 domistyle/idrac6
+    docker run -d -p 5800:5800 -p 5900:5900 -e CMC_HOST=idrac1.example.org -e CMC_USER=root -e CMC_PASSWORD=1234 domistyle/idrac6
 
 The web interface will be available on port 5800 while the VNC server can be accessed on 5900. Startup might take a few seconds while the Java libraries are downloaded. You can add a volume on /app if you would like to cache them.
 
@@ -24,10 +26,10 @@ The web interface will be available on port 5800 while the VNC server can be acc
 
 | Variable       | Description                                  | Required |
 |----------------|----------------------------------------------|----------|
-|`IDRAC_HOST`| Host for your iDRAC instance. Make sure your instance is reachable with https://<IDRAC_HOST>. See IDRAC_PORT for using custom ports. HTTPS is always used. | Yes |
-|`IDRAC_USER`| Username for your iDRAC instance. | Yes |
-|`IDRAC_PASSWORD`| Password for your iDRAC instance. | Yes |
-|`IDRAC_PORT`| The optional port for the web interface. (443 by default) | No |
+|`CMC_HOST`| Host for your iDRAC instance. Make sure your instance is reachable with https://<CMC_HOST>. See IDRAC_PORT for using custom ports. HTTPS is always used. | Yes |
+|`CMC_USER`| Username for your iDRAC instance. | Yes |
+|`CMC_PASSWORD`| Password for your iDRAC instance. | Yes |
+|`CHASSIS_ID`| The chassis you want to connect to | Yes |
 |`IDRAC_KEYCODE_HACK`| If you have issues with keyboard input, try setting this to ``true``. See [here](https://github.com/anchor/idrac-kvm-keyboard-fix) for more infos. | No |
 
 **For advanced configuration options please take a look [here](https://github.com/jlesage/docker-baseimage-gui#environment-variables).**

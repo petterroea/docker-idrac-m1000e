@@ -1,38 +1,17 @@
-version: '3.1'
+version: '3'
 
 services:
   idrac1:
-    image: domistyle/idrac6
-    restart: always
-    ports:
-      - 5800:5800
-      - 5900:5900
-    environment:
-      - IDRAC_HOST=idrac1.example.org
-      - IDRAC_USER=root
-      - IDRAC_PASSWORD=1234
-    volumes:
-      - /path/to/app:/app
-      - /path/to/media:/vmedia
-      - /path/to/screenshots:/screenshots
-  idrac2:
-    image: domistyle/idrac6
+    build:
+      dockerfile: Dockerfile
     restart: always
     ports:
       - 5801:5800
       - 5901:5900
-    secrets:
-      - idrac_host
-      - idrac_user
-      - idrac_password
+    environment:
+      - CMC_HOST=10.0.0.1
+      - CMC_USER=admin
+      - CMC_PASSWORD=example
+      - CHASSIS_ID=1
     volumes:
-      - /path/to/app:/app
-      - /path/to/media:/vmedia
-      - /path/to/screenshots:/screenshots
-secrets:
-  idrac_host:
-    file: ./idrac_host.txt
-  idrac_user:
-    file: ./idrac_user.txt
-  idrac_password:
-    file: ./idrac_password.txt
+      - /home/petterroea/Downloads:/vmedia
