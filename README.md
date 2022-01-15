@@ -46,9 +46,7 @@ Make sure the container user has read & write permission to these folders on the
 
 ## Issues & limitations
 
-* ~Libraries are not loaded correctly~
-  * ~Causes error message on start~
-  * ~"Pass all keystrokes to server", "Single Cursor" and "Virtual Media" is not available until fixed~
+ * Sessions aren't cleanly exited, so you can exhaust an iDRAC instance's session list. If this happens, dunno, wait a bit?
 * User preferences can't be saved
 * VNC starts with default 1024x768 resolution instead of fullscreen
   * Use "View" -> "Full Screen" to work around this issue
